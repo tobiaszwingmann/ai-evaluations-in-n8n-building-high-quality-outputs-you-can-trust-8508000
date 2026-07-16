@@ -11,7 +11,7 @@
 
 **Switch**
 
-```{{ $('Evaluation').item.json.id }}``` exists
+```{{ $('Evaluation').item.json.id }}``` – `Number` --> exists
 
 ---
 
