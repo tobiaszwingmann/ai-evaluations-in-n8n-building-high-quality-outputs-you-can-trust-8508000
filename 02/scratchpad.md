@@ -11,11 +11,11 @@
 
 **Switch**
 
-`{{ $('Evaluation').item.json.id }}` exists
+```{{ $('Evaluation').item.json.id }}``` exists
 
 **Edit Fields**
 - Name: `Number of sources`
--`source_count` String:
+- `source_count` String:
 ```
 {{
   ($json.output.split(/Sources:\s*\r?\n/)[1] || '')
