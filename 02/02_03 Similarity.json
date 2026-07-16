@@ -1,5 +1,5 @@
 {
-  "name": "02_02 Exact",
+  "name": "02_03 Similarity",
   "nodes": [
     {
       "parameters": {
@@ -11,9 +11,9 @@
         208,
         192
       ],
-      "id": "89130a3e-1dfc-40d7-a93e-5a4f5914d3b3",
+      "id": "f3a007f5-f077-44bd-a2f5-e6ef35afbe94",
       "name": "When chat message received",
-      "webhookId": "5b3a05e2-c4dc-4c2a-8cc4-975a76deb2c3"
+      "webhookId": "12ff9828-6d8b-45b6-b345-3779af6328cb"
     },
     {
       "parameters": {
@@ -31,7 +31,7 @@
         560,
         96
       ],
-      "id": "79d1ace7-ff41-4720-896d-74fab5c2f197",
+      "id": "3cf49625-92dd-4043-893b-de1d84efec31",
       "name": "AI Agent",
       "alwaysOutputData": true
     },
@@ -54,7 +54,7 @@
         432,
         320
       ],
-      "id": "c013099e-da05-4eef-be27-52c3791a1b7d",
+      "id": "00592a89-fe1d-4aa5-bba0-6bea4c22796a",
       "name": "OpenAI Chat Model",
       "credentials": {
         "openAiApi": {
@@ -90,9 +90,9 @@
         688,
         320
       ],
-      "id": "06475557-24c9-444f-862b-2773e3c8679d",
+      "id": "3fa84b48-c714-4cc9-aaa9-4fa857deb9bb",
       "name": "List files",
-      "webhookId": "bb5144d9-fc27-4314-9bbe-a26476fd0783",
+      "webhookId": "22a602a0-c707-4161-91a2-f21c8917f0f3",
       "credentials": {
         "githubOAuth2Api": {
           "id": "uj6ICrWupTmCdWut",
@@ -108,7 +108,7 @@
         560,
         320
       ],
-      "id": "a36b2f32-1e43-4f1f-bdbe-3a610a0803ab",
+      "id": "b08bf698-37c7-44e4-b3cd-efeec6118c57",
       "name": "Simple Memory",
       "alwaysOutputData": false
     },
@@ -135,7 +135,7 @@
         816,
         320
       ],
-      "id": "61e24d07-03cc-4f93-93f0-a6b3a94988cd",
+      "id": "ae1610ff-da83-4ad7-b388-66bb38d195b8",
       "name": "Download File",
       "credentials": {
         "githubOAuth2Api": {
@@ -152,7 +152,7 @@
         -464,
         0
       ],
-      "id": "9684d82e-4bbc-4535-a660-f693465cf628",
+      "id": "6c3734b8-767b-458a-b628-e7fc4e7d6f53",
       "name": "When clicking ‘Execute workflow’"
     },
     {
@@ -165,6 +165,9 @@
           "cachedResultName": "evals",
           "cachedResultUrl": "/projects/uxqpE7EzPH2UvIcO/datatables/EoOa3X2b0iTV2pUq"
         },
+        "filters": {
+          "conditions": []
+        },
         "returnAll": true
       },
       "type": "n8n-nodes-base.dataTable",
@@ -173,7 +176,7 @@
         -240,
         0
       ],
-      "id": "03989b70-636d-4818-aa5c-4bf78c144c88",
+      "id": "71abfa5f-3762-4acf-9b74-058ada241647",
       "name": "Get row(s)"
     },
     {
@@ -186,7 +189,7 @@
         -16,
         0
       ],
-      "id": "9b978d63-a221-4ab3-be37-ba2d91e64366",
+      "id": "358d5083-b56f-4c42-a37d-030edf1e4ae1",
       "name": "Loop Over Items"
     },
     {
@@ -216,7 +219,7 @@
         208,
         0
       ],
-      "id": "0f3cda7b-a107-4b72-a0f8-599a54eb37e2",
+      "id": "0e353733-bf9a-4984-b3ad-dfd10bb3b9dc",
       "name": "Evaluation"
     },
     {
@@ -256,7 +259,7 @@
         912,
         96
       ],
-      "id": "2a6f9c7e-9f9e-41d2-bdb9-71ce8cffee01",
+      "id": "6c1f48d9-9851-4829-a611-d8d046acd52f",
       "name": "Switch"
     },
     {
@@ -279,7 +282,7 @@
         1120,
         96
       ],
-      "id": "f5613a9d-2d2f-4e00-8884-7bb94372555a",
+      "id": "fbe3a99e-89dd-41ce-bcd5-125549878476",
       "name": "Number of sources"
     },
     {
@@ -298,7 +301,7 @@
         1328,
         96
       ],
-      "id": "417538df-7b28-4603-924b-f9cf0ce18321",
+      "id": "ee3b5572-fa64-435c-814f-f5f584f76f5f",
       "name": "eval_source_count"
     },
     {
@@ -382,11 +385,53 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        1536,
+        1632,
         96
       ],
-      "id": "915b4a18-2e8b-42bd-96b8-ca1c432eeef8",
+      "id": "7b469f3e-7edf-4c67-8754-a2b72e463359",
       "name": "Update row(s)"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c1f3d2d7-8e44-4591-8cf1-0a8a30865fa8",
+              "name": "source_names",
+              "value": "={{\n  (() => {\n    const match = $json.output.match(/Sources:\\s*\\r?\\n([\\s\\S]*)$/);\n\n    if (!match) return [\"\"];\n\n    const sources = match[1]\n      .split(/\\r?\\n/)\n      .map(source => source.trim())\n      .filter(Boolean)\n\n      // Remove source reference prefixes like \"- ^1\", \"^2\", or \"- ^-1\"\n      .map(source => source.replace(/^[-*]?\\s*\\^-?\\d+\\s*/, '').trim())\n\n      // Replace Markdown links with only the visible link text\n      .map(source => source.replace(/\\[([^\\]]+)\\]\\([^)]+\\)/g, '$1').trim())\n\n      // Remove trailing page info like \", page N/A\"\n      .map(source => source.replace(/,\\s*page\\s+N\\/A$/i, '').trim())\n\n      // Remove anything that became empty after cleanup\n      .filter(Boolean)\n\n      // Sort alphabetically, case-insensitive\n      .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));\n\n    return sources.length ? sources : [\"\"];\n  })()\n}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1136,
+        288
+      ],
+      "id": "e7f2995a-25b8-46ac-87f5-171d407c69f1",
+      "name": "Source Names"
+    },
+    {
+      "parameters": {
+        "operation": "setMetrics",
+        "metric": "stringSimilarity",
+        "expectedAnswer": "={{ $('Evaluation').item.json.expected_sources }}",
+        "actualAnswer": "={{ $json.source_names }}",
+        "options": {
+          "metricName": "eval_source_match"
+        }
+      },
+      "type": "n8n-nodes-base.evaluation",
+      "typeVersion": 4.8,
+      "position": [
+        1328,
+        288
+      ],
+      "id": "3d1a2cd9-33a5-4da6-a7e7-eee4d5f032f3",
+      "name": "eval_source_match"
     }
   ],
   "pinData": {},
@@ -509,6 +554,11 @@
             "node": "Number of sources",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Source Names",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -545,6 +595,28 @@
           }
         ]
       ]
+    },
+    "Source Names": {
+      "main": [
+        [
+          {
+            "node": "eval_source_match",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "eval_source_match": {
+      "main": [
+        [
+          {
+            "node": "Update row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
@@ -553,11 +625,11 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "513f6f35-701f-4099-8fca-365257f09181",
+  "versionId": "6b69275a-9a3f-48de-a4c3-8dcc44298517",
   "meta": {
     "instanceId": "94e1edcc34a91a151fc2ec1b99597068a304e37fdb946fc806f00f97776fce3a"
   },
   "nodeGroups": [],
-  "id": "y5MXLR5nbgv36GZe",
+  "id": "iuLOEajlFKB0CQ7q",
   "tags": []
 }
