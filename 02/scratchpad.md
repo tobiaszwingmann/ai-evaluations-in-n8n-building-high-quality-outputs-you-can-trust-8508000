@@ -9,10 +9,11 @@
 - `sessionId`String: `{{$now.toMillis()}}`
 - Include Other Input Fields: `On`, `All`
 
+---
 **Switch**
 
 ```{{ $('Evaluation').item.json.id }}``` exists
-
+---
 **Edit Fields**
 - Name: `Number of sources`
 - `source_count` String:
@@ -22,7 +23,7 @@
     .split(/\r?\n/).length
 }}
 ``` 
-
+---
 **Set Metrics**
 - `Categorization`
 - Expected Answer: `{{ $('Evaluation').item.json.expected_source_count }}`
